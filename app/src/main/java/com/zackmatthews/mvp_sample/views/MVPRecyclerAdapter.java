@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zackmatthews.mvp_sample.R;
+import com.zackmatthews.mvp_sample.models.GenericItem;
 import com.zackmatthews.mvp_sample.models.Movie;
 
 import java.util.ArrayList;
@@ -59,10 +60,9 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
             holder.img.setImageBitmap(img);
         }
         else if(Movie.useDefaultImg){
-            holder.img.setImageResource(Movie.defaultImgRes);
+            holder.img.setImageResource(GenericItem.defaultImgRes);
         }
 
-        final int mPos = position;
         final Context ctx = holder.ctx;
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +78,9 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         return data.size();
     }
 
+    public void setData(List<Movie> data){
+        this.data = data;
+    }
 
     public void add(Movie movie){
         data.add(movie);

@@ -1,5 +1,6 @@
 package com.zackmatthews.mvp_sample.views;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,14 +15,18 @@ import android.view.MenuItem;
 
 import com.zackmatthews.mvp_sample.R;
 import com.zackmatthews.mvp_sample.models.Movie;
+import com.zackmatthews.mvp_sample.presenters.MainPresenter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainPresenter.MainContract{
 
     public @BindView(R.id.mainRecycler) RecyclerView recyclerView;
     private MVPRecyclerAdapter adapter = new MVPRecyclerAdapter();
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         mockItems(adapter);
         setupViews();
         recyclerView.setAdapter(adapter);
+        presenter = new MainPresenter(this);
+        presenter.refreshData();
     }
 
     private void setupViews(){
@@ -92,5 +99,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDataLoaded(List<Movie> data) {
+
+    }
+
+    @Override
+    public Context getContext() {
+        return MainActivity.this;
     }
 }
