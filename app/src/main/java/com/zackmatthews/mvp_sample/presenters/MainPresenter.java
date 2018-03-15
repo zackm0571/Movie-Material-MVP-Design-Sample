@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.zackmatthews.mvp_sample.models.ApiManager;
 import com.zackmatthews.mvp_sample.models.Movie;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by zmatthews on 3/14/18.
  */
 
-public class MainPresenter implements Response.Listener<JSONObject>, Response.ErrorListener{
+public class MainPresenter implements Response.Listener<JSONArray>, Response.ErrorListener{
 
     public interface MainContract{
         void onDataLoaded(List<Movie> data);
@@ -33,7 +34,7 @@ public class MainPresenter implements Response.Listener<JSONObject>, Response.Er
     }
 
     @Override
-    public void onResponse(JSONObject response) {
+    public void onResponse(JSONArray response) {
             Log.d(MainPresenter.class.getSimpleName(), response.toString());
     }
 

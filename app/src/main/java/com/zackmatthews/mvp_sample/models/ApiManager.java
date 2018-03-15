@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -23,12 +25,12 @@ public class ApiManager {
         return instance;
     }
 
-    public void getJson(Context context, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener){
+    public void getJson(Context context, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener){
         getQueue(context).add(getRequest(listener, errorListener));
     }
 
-    private JsonObjectRequest getRequest(Response.Listener<JSONObject> listener, Response.ErrorListener errorListener){
-        return new JsonObjectRequest(jsonUrl, null, listener, errorListener);
+    private JsonArrayRequest getRequest(Response.Listener<JSONArray> listener, Response.ErrorListener errorListener){
+        return new JsonArrayRequest(jsonUrl, listener, errorListener);
     }
 
     private RequestQueue getQueue(Context context) {
