@@ -10,6 +10,9 @@ import com.zackmatthews.mvp_sample.R;
  */
 
 public class Movie extends GenericItem{
+    public static final String YEAR_KEY = "year";
+    public static final String DIRECTOR_KEY = "director";
+
     private String year, director;
 
     public String getYear() {

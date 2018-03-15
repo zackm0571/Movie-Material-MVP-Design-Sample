@@ -9,8 +9,10 @@ import com.zackmatthews.mvp_sample.models.ApiManager;
 import com.zackmatthews.mvp_sample.models.Movie;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +20,6 @@ import java.util.List;
  */
 
 public class MainPresenter implements Response.Listener<JSONArray>, Response.ErrorListener{
-
     public interface MainContract{
         void onDataLoaded(List<Movie> data);
         Context getContext();
@@ -36,6 +37,23 @@ public class MainPresenter implements Response.Listener<JSONArray>, Response.Err
     @Override
     public void onResponse(JSONArray response) {
             Log.d(MainPresenter.class.getSimpleName(), response.toString());
+            List<Movie> data = new ArrayList<>();
+
+            for(int i = 0; i < response.length(); i++){
+                try {
+                    JSONObject obj = response.getJSONObject(i);
+
+                    Movie movie = new Movie();
+                    movie.setTitle(obj.optString(Movie.TITLE_KEY));
+                    movie.setDirector(obj.optString(Movie.DIRECTOR_KEY));
+                    movie.setYear(obj.optString(Movie.YEAR_KEY));
+                    data.add(movie);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            contract.onDataLoaded(data);
     }
 
     @Override

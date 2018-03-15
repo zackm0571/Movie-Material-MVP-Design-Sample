@@ -86,4 +86,8 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         data.add(movie);
         notifyDataSetChanged();
     }
+
+    public void clearData(){
+        data.clear();
+    }
 }

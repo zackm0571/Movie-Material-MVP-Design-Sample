@@ -9,6 +9,9 @@ import com.zackmatthews.mvp_sample.R;
  */
 
 public class GenericItem {
+    public static final String TITLE_KEY = "title";
+    public static final String IMG_URL_KEY = "img";
+
     public static boolean useDefaultImg = true;
     public static int defaultImgRes = R.drawable.ic_launcher_background;
 
