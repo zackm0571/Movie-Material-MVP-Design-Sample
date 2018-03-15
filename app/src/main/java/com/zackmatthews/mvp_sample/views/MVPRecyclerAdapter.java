@@ -80,6 +80,7 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
 
     public void setData(List<Movie> data){
         this.data = data;
+        notifyDataSetChanged();
     }
 
     public void add(Movie movie){

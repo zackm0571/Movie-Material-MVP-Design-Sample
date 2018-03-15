@@ -36,6 +36,7 @@ public class ApiManager {
     private RequestQueue getQueue(Context context) {
         if(queue == null) {
             queue = Volley.newRequestQueue(context);
+            queue.getCache().clear();
             queue.start();
         }
         return queue;

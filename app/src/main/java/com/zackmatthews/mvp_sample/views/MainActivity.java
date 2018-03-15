@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
             }
         });
 
-        mockItems(adapter);
         setupViews();
         recyclerView.setAdapter(adapter);
         presenter = new MainPresenter(this);
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     private void setupViews(){
         recyclerView.addItemDecoration(new EqualSpacingItemDecoration(20, LinearLayoutManager.VERTICAL));
         recyclerView.addItemDecoration(new EqualSpacingItemDecoration(20, LinearLayoutManager.HORIZONTAL));
-
     }
 
     private void mockItems(MVPRecyclerAdapter adapter){

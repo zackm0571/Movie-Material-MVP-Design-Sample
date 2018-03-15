@@ -2,6 +2,7 @@ package com.zackmatthews.mvp_sample.presenters;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -58,6 +59,7 @@ public class MainPresenter implements Response.Listener<JSONArray>, Response.Err
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Log.e(MainPresenter.class.getSimpleName(), error.getLocalizedMessage());
+        Toast.makeText(contract.getContext(), String.format("JSON LOAD ERROR %s", error.getLocalizedMessage()), Toast.LENGTH_SHORT).show();
     }
 }
