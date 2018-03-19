@@ -10,8 +10,8 @@ import com.zackmatthews.mvp_sample.R;
  */
 
 public class Movie extends GenericItem{
-    public static final String YEAR_KEY = "year";
-    public static final String DIRECTOR_KEY = "director";
+    public static final String YEAR_KEY = "Year";
+    public static final String DIRECTOR_KEY = "Director";
 
     private String year, director, img_url;
 
