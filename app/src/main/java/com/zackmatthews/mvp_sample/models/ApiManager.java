@@ -1,9 +1,12 @@
 package com.zackmatthews.mvp_sample.models;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,9 +32,17 @@ public class ApiManager {
         getQueue(context).add(getRequest(listener, errorListener));
     }
 
+    public void getImage(Context context, String url, Response.Listener<Bitmap> bmpListener, Response.ErrorListener errorListener){
+        getQueue(context).add(getImageRequest(url, bmpListener, errorListener));
+    }
+
+    private ImageRequest getImageRequest(String url, Response.Listener<Bitmap> bmpListener, Response.ErrorListener errorListener){
+        return new ImageRequest(url, bmpListener, 240, 240, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.ARGB_8888, errorListener);
+    }
     private JsonArrayRequest getRequest(Response.Listener<JSONArray> listener, Response.ErrorListener errorListener){
         return new JsonArrayRequest(jsonUrl, listener, errorListener);
     }
+
 
     private RequestQueue getQueue(Context context) {
         if(queue == null) {

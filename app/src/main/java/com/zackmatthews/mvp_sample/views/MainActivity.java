@@ -108,4 +108,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     public Context getContext() {
         return MainActivity.this;
     }
+
+    @Override
+    public void updateEntry(Movie _old, Movie _new) {
+        ((MVPRecyclerAdapter)recyclerView.getAdapter()).updateMovie(_old, _new);
+    }
 }

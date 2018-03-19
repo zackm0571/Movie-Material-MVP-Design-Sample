@@ -13,7 +13,7 @@ public class Movie extends GenericItem{
     public static final String YEAR_KEY = "year";
     public static final String DIRECTOR_KEY = "director";
 
-    private String year, director;
+    private String year, director, img_url;
 
     public String getYear() {
         return year;
@@ -29,5 +29,13 @@ public class Movie extends GenericItem{
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 }

@@ -90,5 +90,12 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
 
     public void clearData(){
         data.clear();
+        notifyDataSetChanged();
+    }
+
+    public void updateMovie(Movie movie, Movie newMovie){
+        data.remove(movie);
+        add(newMovie);
+        notifyDataSetChanged();
     }
 }
