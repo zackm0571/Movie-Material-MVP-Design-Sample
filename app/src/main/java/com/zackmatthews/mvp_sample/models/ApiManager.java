@@ -18,10 +18,9 @@ import org.json.JSONObject;
  * Created by zmatthews on 3/15/18.
  */
 
-public class ApiManager {
+public class ApiManager extends ApiContract{
     private static final String jsonUrl = "https://zackmatthews.com/movies.json";
     private static ApiManager instance;
-    private RequestQueue queue;
     public static ApiManager getInstance(){
 
         if(instance == null) instance = new ApiManager();
@@ -43,13 +42,4 @@ public class ApiManager {
         return new JsonArrayRequest(jsonUrl, listener, errorListener);
     }
 
-
-    private RequestQueue getQueue(Context context) {
-        if(queue == null) {
-            queue = Volley.newRequestQueue(context);
-            queue.getCache().clear();
-            queue.start();
-        }
-        return queue;
-    }
 }

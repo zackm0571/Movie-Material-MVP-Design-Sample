@@ -15,7 +15,7 @@ public class GenericItem {
     public static boolean useDefaultImg = true;
     public static int defaultImgRes = R.drawable.ic_launcher_background;
 
-    private String title;
+    private String id,title;
     private Bitmap img;
 
     public String getTitle() {
@@ -32,5 +32,13 @@ public class GenericItem {
 
     public void setImg(Bitmap img) {
         this.img = img;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

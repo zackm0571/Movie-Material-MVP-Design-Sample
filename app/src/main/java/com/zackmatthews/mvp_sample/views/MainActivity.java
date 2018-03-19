@@ -16,6 +16,7 @@ import com.zackmatthews.mvp_sample.R;
 import com.zackmatthews.mvp_sample.models.Movie;
 import com.zackmatthews.mvp_sample.presenters.MainPresenter;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,19 +62,19 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         movie.setTitle("Lambs");
         movie.setDirector("Lector");
         movie.setYear("1999");
-        adapter.add(movie);
+        adapter.putMovie(movie);
 
         movie = new Movie();
         movie.setTitle("Star wars");
         movie.setDirector("solo");
         movie.setYear("1989");
-        adapter.add(movie);
+        adapter.putMovie(movie);
 
         movie = new Movie();
         movie.setTitle("Potter");
         movie.setDirector("Harry");
         movie.setYear("1987");
-        adapter.add(movie);
+        adapter.putMovie(movie);
     }
 
     @Override
@@ -99,8 +100,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     }
 
     @Override
-    public void onDataLoaded(List<Movie> data) {
-        ((MVPRecyclerAdapter)recyclerView.getAdapter()).clearData();
+    public void onDataLoaded(HashMap<String, Movie> data) {
         ((MVPRecyclerAdapter)recyclerView.getAdapter()).setData(data);
     }
 
@@ -110,7 +110,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     }
 
     @Override
-    public void updateEntry(Movie _old, Movie _new) {
-        ((MVPRecyclerAdapter)recyclerView.getAdapter()).updateMovie(_old, _new);
+    public void updateEntry(Movie movie) {
+        ((MVPRecyclerAdapter)recyclerView.getAdapter()).putMovie(movie);
+    }
+
+    @Override
+    public int getDataSize() {
+        return ((MVPRecyclerAdapter)recyclerView.getAdapter()).getItemCount();
     }
 }

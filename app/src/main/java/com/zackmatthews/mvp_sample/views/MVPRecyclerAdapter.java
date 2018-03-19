@@ -14,7 +14,9 @@ import com.zackmatthews.mvp_sample.models.GenericItem;
 import com.zackmatthews.mvp_sample.models.Movie;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,7 +41,8 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
             ctx = itemView.getContext();
         }
     }
-    protected List<Movie> data = new ArrayList<>();
+    protected Map<String, Movie> data = new HashMap<>();
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,7 +53,8 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Movie movie = data.get(position);
+        final Movie movie = data.get(String.valueOf(position));
+
         holder.title.setText(movie.getTitle());
         holder.director.setText(movie.getDirector());
         holder.year.setText(movie.getYear());
@@ -78,24 +82,18 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         return data.size();
     }
 
-    public void setData(List<Movie> data){
+    public void setData(HashMap<String, Movie> data){
         this.data = data;
         notifyDataSetChanged();
     }
 
-    public void add(Movie movie){
-        data.add(movie);
+    public void putMovie(Movie movie){
+        data.put(movie.getId(), movie);
         notifyDataSetChanged();
     }
 
     public void clearData(){
         data.clear();
-        notifyDataSetChanged();
-    }
-
-    public void updateMovie(Movie movie, Movie newMovie){
-        data.remove(movie);
-        add(newMovie);
         notifyDataSetChanged();
     }
 }
