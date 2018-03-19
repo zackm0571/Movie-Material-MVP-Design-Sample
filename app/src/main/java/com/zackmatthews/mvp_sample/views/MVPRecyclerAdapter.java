@@ -43,7 +43,6 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
     }
     protected Map<String, Movie> data = new HashMap<>();
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final Context ctx = parent.getContext();

@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailsActivity extends AppCompatActivity {
-    private static GenericItem item;
+    private static Movie item;
     public @BindView(R.id.tv_details_title) TextView title;
     public @BindView(R.id.details_circleImg) ImageView img;
     public @BindView(R.id.tv_movieDetails)TextView details;
@@ -32,7 +32,6 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void populateMovieDetails(){
-
         StringBuilder outputString = new StringBuilder();
 
         outputString.append(Movie.DIRECTOR_KEY);
@@ -63,7 +62,7 @@ public class DetailsActivity extends AppCompatActivity {
         details.setText(outputString);
     }
 
-    public static void setItem(GenericItem _item){
+    public static void setItem(Movie _item){
         item = _item;
     }
 

@@ -29,6 +29,6 @@ public class OmdbApiManager extends ApiContract{
     }
 
     private JsonObjectRequest getMovieDetailsRequest(String title, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener){
-        return new JsonObjectRequest(String.format(apiUrl, apiKey, title), null, listener, errorListener);
+        return new JsonObjectRequest(String.format(apiUrl, apiKey, title.replace(" ", "+")), null, listener, errorListener);
     }
 }

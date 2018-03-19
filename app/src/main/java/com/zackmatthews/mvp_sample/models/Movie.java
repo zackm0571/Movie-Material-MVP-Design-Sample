@@ -95,18 +95,7 @@ public class Movie extends GenericItem{
 
 
     public static Movie fromMovie(Movie _movie){
-        Movie newMovie = new Movie();
-        newMovie.setId(_movie.getId());
-        newMovie.setTitle(_movie.getTitle());
-        newMovie.setImg_url(_movie.getImg_url());
-        newMovie.setImg((_movie.getImg()));
-        newMovie.setDirector(_movie.getDirector());
-        newMovie.setYear(_movie.getYear());
-        newMovie.setGenre(_movie.getGenre());
-        newMovie.setActors(_movie.getActors());
-        newMovie.setPlot(_movie.getPlot());
-        newMovie.setRated(_movie.getRated());
-        newMovie.setRuntime(_movie.getRuntime());
+        Movie newMovie = _movie;
         return newMovie;
     }
 
