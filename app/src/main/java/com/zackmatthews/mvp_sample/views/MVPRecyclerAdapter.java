@@ -27,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.MyViewHolder>{
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView title, year, director;
+        public TextView title, year, director, genre, rating;
         public CircleImageView img;
         public ViewGroup container;
         public Context ctx;
@@ -36,6 +36,8 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
             title = itemView.findViewById(R.id.tv_movie_name);
             year = itemView.findViewById(R.id.tv_movie_year);
             director = itemView.findViewById(R.id.tv_director);
+            genre = itemView.findViewById(R.id.tv_genre);
+            rating = itemView.findViewById(R.id.tv_rating);
             img = itemView.findViewById(R.id.circleImage);
             container = itemView.findViewById(R.id.row_container);
             ctx = itemView.getContext();
@@ -57,6 +59,8 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         holder.title.setText(movie.getTitle());
         holder.director.setText(movie.getDirector());
         holder.year.setText(movie.getYear());
+        holder.genre.setText(movie.getGenre());
+        holder.rating.setText(movie.getRated());
 
         Bitmap img = movie.getImg();
         if(img != null) {
