@@ -19,7 +19,7 @@
 
     <RelativeLayout
         android:background="@drawable/shadow_bg"
-        android:alpha="0.8"
+        android:alpha="0.6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -27,7 +27,7 @@
         android:id="@+id/titleContainer"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -43,11 +43,13 @@
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/titleContainer"
-        android:layout_height="320dp">
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/tv_movieDetails"
         android:layout_width="match_parent"
