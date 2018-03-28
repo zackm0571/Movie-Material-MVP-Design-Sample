@@ -2,7 +2,9 @@ package com.zackmatthews.mvp_sample.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,10 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         return new MyViewHolder(itemView);
     }
 
+
+    private SharedPreferences getPrefs(Context ctx){
+        return PreferenceManager.getDefaultSharedPreferences(ctx);
+    }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Movie movie = data.get(String.valueOf(position));
@@ -61,6 +67,16 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         holder.year.setText(movie.getYear());
         holder.genre.setText(movie.getGenre());
         holder.rating.setText(movie.getRated());
+
+
+        boolean showYear = getPrefs(holder.ctx).getBoolean(SettingsActivity.YEAR_PREF_KEY, true);
+
+        if(showYear){
+            holder.year.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.year.setVisibility(View.GONE);
+        }
 
         Bitmap img = movie.getImg();
         if(img != null) {

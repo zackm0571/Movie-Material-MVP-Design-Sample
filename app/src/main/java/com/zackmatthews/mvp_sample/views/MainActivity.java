@@ -1,6 +1,7 @@
 package com.zackmatthews.mvp_sample.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     public @BindView(R.id.mainRecycler) RecyclerView recyclerView;
     private MVPRecyclerAdapter adapter = new MVPRecyclerAdapter();
     private MainPresenter presenter;
+    private boolean isPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         setupViews();
         recyclerView.setAdapter(adapter);
         presenter = new MainPresenter(this);
+        refreshData();
+    }
+
+    private void refreshData(){
         presenter.refreshData();
     }
 
@@ -77,6 +83,22 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         adapter.putMovie(movie);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isPaused){
+            refreshData();
+            isPaused = false;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isPaused = true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -93,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return true;
         }
 
