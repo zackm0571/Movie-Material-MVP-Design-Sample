@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MainPresenter.MainContract{
 
     public @BindView(R.id.mainRecycler) RecyclerView recyclerView;
-    private MVPRecyclerAdapter adapter = new MVPRecyclerAdapter();
     private MainPresenter presenter;
     private boolean isPaused = false;
 
@@ -49,12 +48,17 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         });
 
         setupViews();
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(new MVPRecyclerAdapter());
         presenter = new MainPresenter(this);
         refreshData();
     }
 
+    private MVPRecyclerAdapter getRecyclerAdapter(){
+        return (MVPRecyclerAdapter)recyclerView.getAdapter();
+    }
+
     private void refreshData(){
+        getRecyclerAdapter().clearData();
         presenter.refreshData();
     }
 
@@ -62,27 +66,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         recyclerView.addItemDecoration(new EqualSpacingItemDecoration(20, LinearLayoutManager.VERTICAL));
         recyclerView.addItemDecoration(new EqualSpacingItemDecoration(20, LinearLayoutManager.HORIZONTAL));
     }
-
-    private void mockItems(MVPRecyclerAdapter adapter){
-        Movie movie = new Movie();
-        movie.setTitle("Lambs");
-        movie.setDirector("Lector");
-        movie.setYear("1999");
-        adapter.putMovie(movie);
-
-        movie = new Movie();
-        movie.setTitle("Star wars");
-        movie.setDirector("solo");
-        movie.setYear("1989");
-        adapter.putMovie(movie);
-
-        movie = new Movie();
-        movie.setTitle("Potter");
-        movie.setDirector("Harry");
-        movie.setYear("1987");
-        adapter.putMovie(movie);
-    }
-
 
     @Override
     protected void onResume() {
@@ -123,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
     }
 
     @Override
-    public void onDataLoaded(HashMap<String, Movie> data) {
-        ((MVPRecyclerAdapter)recyclerView.getAdapter()).setData(data);
+    public void onDataLoaded(List<Movie> data) {
+        getRecyclerAdapter().clearData();
+        getRecyclerAdapter().setData(data);
     }
 
     @Override
@@ -134,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
 
     @Override
     public void updateEntry(Movie movie) {
-        ((MVPRecyclerAdapter)recyclerView.getAdapter()).putMovie(movie);
+        getRecyclerAdapter().putMovie(movie);
     }
 
     @Override
     public int getDataSize() {
-        return ((MVPRecyclerAdapter)recyclerView.getAdapter()).getItemCount();
+        return  getRecyclerAdapter().getItemCount();
     }
 }

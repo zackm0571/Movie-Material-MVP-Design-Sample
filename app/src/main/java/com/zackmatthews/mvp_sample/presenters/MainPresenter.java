@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MainPresenter {
     public interface MainContract{
-        void onDataLoaded(HashMap<String, Movie> data);
+        void onDataLoaded(List<Movie> data);
         void updateEntry(Movie movie);
         int getDataSize();
         Context getContext();
@@ -63,12 +63,9 @@ public class MainPresenter {
                         movie.setYear(obj.optString(Movie.YEAR_KEY));
                         movie.setImg_url(obj.optString(Movie.IMG_URL_KEY));
                         movie.setId(String.valueOf(contract.getDataSize()));
-                        BitmapListener bmpListener = new BitmapListener(movie);
-                        ApiManager.getInstance().getImage(contract.getContext(), movie.getImg_url(), bmpListener, bmpListener);
 
                         JsonMovieDataListener movieListener = new JsonMovieDataListener(movie);
                         OmdbApiManager.getInstance().getMovieDetailsForTitle(contract.getContext(), movie.getTitle(), movieListener, movieListener);
-                        contract.updateEntry(movie);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zackmatthews.mvp_sample.R;
 import com.zackmatthews.mvp_sample.models.GenericItem;
 import com.zackmatthews.mvp_sample.models.Movie;
@@ -68,9 +69,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     protected void refreshLayout(){
         title.setText(item.getTitle());
-        Bitmap bmp = item.getImg();
-        if(bmp != null){
-            img.setImageBitmap(bmp);
+
+        if(item.getImg_url() != null){
+            Picasso.get().load(item.getImg_url()).into(img);
         }
         else if(GenericItem.useDefaultImg){
             img.setImageResource(GenericItem.defaultImgRes);

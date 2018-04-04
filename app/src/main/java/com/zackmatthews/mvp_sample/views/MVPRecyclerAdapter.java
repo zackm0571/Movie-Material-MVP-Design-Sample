@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zackmatthews.mvp_sample.R;
 import com.zackmatthews.mvp_sample.models.GenericItem;
 import com.zackmatthews.mvp_sample.models.Movie;
@@ -45,7 +46,7 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
             ctx = itemView.getContext();
         }
     }
-    protected Map<String, Movie> data = new HashMap<>();
+    protected List<Movie> data = new ArrayList<>();
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,16 +59,21 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
     private SharedPreferences getPrefs(Context ctx){
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Movie movie = data.get(String.valueOf(position));
+        final Movie movie = data.get(position);
 
         holder.title.setText(movie.getTitle());
         holder.director.setText(movie.getDirector());
         holder.year.setText(movie.getYear());
         holder.genre.setText(movie.getGenre());
         holder.rating.setText(movie.getRated());
-
 
         boolean showYear = getPrefs(holder.ctx).getBoolean(SettingsActivity.YEAR_PREF_KEY, true);
 
@@ -78,9 +84,9 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
             holder.year.setVisibility(View.GONE);
         }
 
-        Bitmap img = movie.getImg();
-        if(img != null) {
-            holder.img.setImageBitmap(img);
+
+        if(movie.getImg_url() != null) {
+            Picasso.get().load(movie.getImg_url()).into(holder.img);
         }
         else if(Movie.useDefaultImg){
             holder.img.setImageResource(GenericItem.defaultImgRes);
@@ -101,15 +107,16 @@ public class MVPRecyclerAdapter extends RecyclerView.Adapter<MVPRecyclerAdapter.
         return data.size();
     }
 
-    public void setData(HashMap<String, Movie> data){
+    public void setData(List<Movie> data){
         this.data = data;
         notifyDataSetChanged();
     }
 
     public void putMovie(Movie movie){
-        data.put(movie.getId(), movie);
+        data.add(movie);
         notifyDataSetChanged();
     }
+
 
     public void clearData(){
         data.clear();
